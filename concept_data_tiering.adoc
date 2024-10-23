@@ -1,0 +1,129 @@
+---
+sidebar: sidebar 
+permalink: concept_data_tiering.html 
+keywords: storage tiering, tier, tiering, data tiering, s3, s3 tiering, capacity, performance, s3 endpoint, fabric pool, fabricpool, s3 bucket, requirement, vpc endpoint, policy, policies, tiering policies, auto, snapshot only, backup, none, cooling period, volume tiering policies, blob, standard, infrequent access, hot, cool, tiering level, storage tier, storage class 
+summary: Você pode reduzir os custos de storage habilitando a disposição automatizada em camadas de dados inativos no storage de objetos de baixo custo. 
+---
+= Visão geral de categorização de dados
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+É possível reduzir os custos de storage habilitando a disposição automatizada de dados inativos em storage de objetos de baixo custo. Os dados ativos permanecem em SSDs ou HDDs de alta performance (a camada de performance), enquanto os dados inativos são dispostos em camadas em storage de objetos de baixo custo (a camada de capacidade). Isso permite recuperar espaço no storage primário e reduzir o storage secundário.
+
+O Cloud Volumes ONTAP é compatível com categorização de dados na AWS e no Microsoft Azure. A disposição de dados em categorias é baseada na tecnologia FabricPool.
+
+
+NOTE: Não é necessário instalar uma licença de recurso para habilitar a disposição em camadas de dados.
+
+
+
+== Como a disposição de dados em camadas funciona na AWS
+
+Ao habilitar a disposição de dados em categorias na AWS, o Cloud Volumes ONTAP usa o EBS como uma camada de desempenho para dados ativos e o AWS S3 como uma camada de capacidade para dados inativos:
+
+image:diagram_storage_tiering.png["Esta é uma imagem concetual que mostra dados quentes que vão para o armazenamento EBS e dados inativos que vão para o armazenamento S3."]
+
+
+
+=== Nível de performance na AWS
+
+A categoria de performance pode ser SSDs de uso geral, SSDs IOPS provisionados ou HDDs otimizados para taxa de transferência.
+
+
+
+=== Camada de capacidade na AWS
+
+Por padrão, o Cloud Volumes ONTAP classifica os dados inativos para a classe de armazenamento S3 _Standard_. O padrão é ideal para dados acessados com frequência armazenados em várias zonas de disponibilidade.
+
+Se você não planeja acessar os dados inativos, poderá reduzir os custos de storage alterando o nível de disposição em categorias de um sistema para um dos seguintes, depois de implantar o Cloud Volumes ONTAP:
+
+Disposição em camadas inteligente:: Otimiza custos de storage movendo dados entre duas camadas à medida que os padrões de acesso aos dados mudam. Um nível é para acesso frequente e o outro para acesso não frequente.
+Uma zona de acesso pouco frequente:: Para dados acessados com pouca frequência armazenados em uma única zona de disponibilidade.
+Acesso padrão-infrequente:: Para dados acessados com pouca frequência armazenados em várias zonas de disponibilidade.
+
+
+Os custos de acesso são maiores se você acessar os dados, então você deve levar isso em consideração antes de alterar o nível de disposição em categorias. Para obter mais detalhes sobre as classes de armazenamento S3, https://aws.amazon.com/s3/storage-classes["Documentação do AWS"^] consulte .
+
+Quando você altera o nível de disposição em camadas, os dados inativos são iniciados na classe de armazenamento padrão e migram para a classe de armazenamento selecionada, se os dados não forem acessados após 30 dias. Para obter detalhes sobre como alterar o nível de disposição em camadas, link:task_tiering.html["Disposição em camadas dos dados inativos em storage de objetos de baixo custo"]consulte .
+
+O nível de disposição em categorias é amplo do sistema, não é por volume.
+
+
+NOTE: Um ambiente de trabalho do Cloud Volumes ONTAP usa um bucket do S3 para todos os dados em camadas do sistema. Não é utilizado um balde S3 diferente para cada volume. Isso inclui um ambiente de trabalho HA. O Cloud Manager cria um bucket do S3 e nomeia-o Fabric-pool-_cluster unique identifier_.
+
+
+
+== Como a disposição de dados em camadas funciona no Microsoft Azure
+
+Ao habilitar a categorização de dados no Azure, o Cloud Volumes ONTAP usa discos gerenciados do Azure como uma categoria de performance para dados ativos e o storage Blob do Azure como uma categoria de capacidade para dados inativos:
+
+image:diagram_storage_tiering_azure.png["Esta é uma imagem conceitual que mostra dados ativos que vão para discos gerenciados do Azure e dados inativos que vão para o armazenamento Blob do Azure."]
+
+
+
+=== Nível de performance no Azure
+
+A camada de performance pode ser de armazenamento Premium (SSD) ou armazenamento padrão (HDD).
+
+
+
+=== Camada de capacidade no Azure
+
+Por padrão, o Cloud Volumes ONTAP classifica dados inativos na camada de storage _hot_ do Azure, ideal para dados acessados com frequência.
+
+Se você não planeja acessar os dados inativos, poderá reduzir seus custos de storage alterando o nível de disposição em camadas de um sistema para a camada de storage _cool_ do Azure depois de implantar o Cloud Volumes ONTAP. O nível inativo é ideal para dados acessados com pouca frequência que residirão no nível por pelo menos 30 dias.
+
+Os custos de acesso são maiores se você acessar os dados, então você deve levar isso em consideração antes de alterar o nível de disposição em categorias. Para obter mais detalhes sobre as camadas de armazenamento do Azure Blob, https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blob-storage-tiers["Documentação do Azure"^] consulte .
+
+Quando você altera o nível de disposição em categorias, os dados inativos começam na camada de storage quente e passam para a camada de storage frio, se os dados não forem acessados após 30 dias. Para obter detalhes sobre como alterar o nível de disposição em camadas, link:task_tiering.html["Disposição em camadas dos dados inativos em storage de objetos de baixo custo"]consulte .
+
+O nível de disposição em categorias é amplo do sistema, não é por volume.
+
+
+NOTE: Um ambiente de trabalho do Cloud Volumes ONTAP usa um contêiner de Blob do Azure para todos os dados em camadas do sistema. Um recipiente diferente não é usado para cada volume. O Cloud Manager cria uma nova conta de storage com um contêiner para cada sistema Cloud Volumes ONTAP. O nome da conta de armazenamento é aleatório.
+
+
+
+== Como a disposição de dados em categorias afeta os limites de capacidade
+
+Se você habilitar a disposição de dados em categorias, o limite de capacidade de um sistema permanecerá o mesmo. O limite se estende pela camada de performance e pela camada de capacidade.
+
+
+
+== Políticas de disposição em camadas de volume
+
+Para habilitar a disposição de dados em categorias, você deve selecionar uma política de disposição em categorias de volume ao criar, modificar ou replicar um volume. Pode selecionar uma política diferente para cada volume.
+
+Algumas políticas de disposição em categorias têm um período de resfriamento mínimo associado, que define o tempo em que os dados do usuário em um volume precisam permanecer inativos para que os dados sejam considerados "frios" e movidos para o nível de capacidade.
+
+O Cloud Volumes ONTAP é compatível com as seguintes políticas de disposição em camadas:
+
+Apenas Snapshot:: Depois que um agregado atinge a capacidade de 50%, o Cloud Volumes ONTAP classifica os dados inativos dos usuários das cópias Snapshot que não estão associados ao sistema de arquivos ativo à categoria de capacidade. O período de resfriamento é de aproximadamente 2 dias.
++
+--
+Se forem lidos, os blocos de dados inativos na camada de capacidade aquecem e são movidos para a categoria de performance.
+
+--
+Auto:: Depois que um agregado atinge a capacidade de 50%, o Cloud Volumes ONTAP dispõe de blocos de dados inativos em um volume para uma categoria de capacidade. Os dados inativos incluem não apenas cópias Snapshot, mas também dados de usuários inativos do sistema de arquivos ativo. O período de resfriamento é de aproximadamente 31 dias.
++
+--
+Esta política é suportada a partir do Cloud Volumes ONTAP 9,4.
+
+Se forem lidos por leituras aleatórias, os blocos de dados inativos na camada de capacidade aquecem e migram para a camada de performance. Se forem lidos por leituras sequenciais, como as associadas a verificações de índice e antivírus, os blocos de dados inativos permanecem inativos e não se movem para o nível de desempenho.
+
+--
+Backup:: Quando você replica um volume para recuperação de desastre ou retenção de longo prazo, os dados do volume de destino começam na categoria de capacidade. Se você ativar o volume de destino, os dados serão movidos gradualmente para o nível de performance à medida que forem lidos.
+Nenhum:: Mantém os dados de um volume na categoria de performance, impedindo que ele seja migrado para a categoria de capacidade.
+
+
+
+
+== Configuração de categorização de dados
+
+Para obter instruções e uma lista de configurações suportadas, link:task_tiering.html["Disposição em camadas dos dados inativos em storage de objetos de baixo custo"]consulte .

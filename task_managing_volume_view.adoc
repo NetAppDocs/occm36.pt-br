@@ -1,0 +1,87 @@
+---
+sidebar: sidebar 
+permalink: task_managing_volume_view.html 
+keywords: NFS volumes, volume view, managing, cloning, clone, delete, deleting, access, disk 
+summary: É possível gerenciar volumes NFS clonando-os, gerenciando o acesso a dados, alterando o tipo de disco subjacente e muito mais. 
+---
+= Gerenciamento de volumes NFS
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+É possível gerenciar volumes NFS clonando-os, gerenciando o acesso a dados, alterando o tipo de disco subjacente e muito mais.
+
+
+
+== Volumes de clonagem
+
+Se você precisar de uma cópia instantânea dos dados sem usar muito espaço em disco, crie um clone de um volume existente.
+
+.Sobre esta tarefa
+O volume clonado é uma cópia gravável e pontual, que é eficiente em espaço, pois usa uma pequena quantidade de espaço para metadados e, em seguida, consome apenas espaço adicional à medida que os dados são alterados ou adicionados.
+
+.Passos
+. Na guia volumes, coloque o cursor do Mouse sobre o volume, selecione o ícone do menu e clique em *Clone*.
+. Modifique o nome do volume clonado, se necessário, e clique em *Clone*.
+
+
+.Resultado
+O Cloud Manager cria um novo volume que é um clone de um volume existente.
+
+
+
+== Gerenciamento do acesso aos dados aos volumes
+
+Quando você cria um volume, o Cloud Manager torna o volume disponível para todas as instâncias do EC2 na VPC em que o volume foi criado. Você pode modificar esse valor padrão se precisar restringir o acesso aos dados ao volume.
+
+.Passos
+. Na guia volumes, coloque o cursor do Mouse sobre o volume, selecione o ícone do menu e clique em *Gerenciar acesso*.
+. Modifique a lista de acesso ao volume e clique em *Salvar*.
+
+
+
+
+== Alterar o disco da AWS subjacente para um volume
+
+Você pode alterar o disco da AWS subjacente que um volume usa para fornecer storage. Por exemplo, se for necessário um desempenho superior, você pode mudar de um HDD otimizado para um SSD de uso geral.
+
+.Passos
+. Na guia volumes, coloque o cursor do Mouse sobre o volume, selecione o ícone do menu e clique em *alterar disco*.
+. Selecione o tipo de disco da AWS e clique em *alterar*.
+
+
+.Resultado
+O Cloud Manager move o volume para um agregado existente que usa o tipo de disco selecionado ou cria um novo agregado para o volume.
+
+
+
+== Visualização e modificação de recursos da AWS
+
+Quando você cria um novo volume, o Cloud Manager aloca as instâncias da AWS e o armazenamento do EBS necessário para esse volume. Se necessário, você pode exibir detalhes sobre instâncias da AWS e armazenamento do EBS, alterar tipos de instância e desativar e ativar instâncias.
+
+.Passos
+. Clique em *recursos da AWS*.
++
+A lista de instâncias da AWS é exibida. Você pode exibir detalhes como tipo de instância, local da AWS e volumes anexados à instância.
+
+. Se necessário, selecione o ícone do menu ao lado da coluna Status e escolha uma das ações disponíveis:
++
+image:screenshot_volume_view_resources.gif["Captura de tela que mostra as ações disponíveis na página recursos da AWS na Exibição de volume."]
+
+
+
+
+
+== Eliminar volumes
+
+Você pode excluir volumes que não precisa mais.
+
+.Passos
+. Na guia volumes, coloque o cursor do Mouse sobre o volume, selecione o ícone do menu e clique em *Excluir*.
+. Clique em *Excluir* para confirmar que deseja excluir o volume.
+

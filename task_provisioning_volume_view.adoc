@@ -1,0 +1,125 @@
+---
+sidebar: sidebar 
+permalink: task_provisioning_volume_view.html 
+keywords: NFS volumes, volume view, creating, mounting, provisioning, create, nfs volumes 
+summary: Você pode usar o Cloud Manager para criar volumes NFS que fornecem recursos de classe empresarial no storage da AWS. 
+---
+= Criação e montagem de volumes NFS
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Você pode usar o Cloud Manager para criar volumes NFS que fornecem recursos de classe empresarial no storage da AWS.
+
+
+
+== Criação de volumes NFS
+
+Você pode criar um volume anexado a uma única instância da AWS ou a uma instância espelhada em outra instância para fornecer alta disponibilidade.
+
+.Passos
+. Na guia volumes, clique em *criar novo volume*.
+. Na página criar novo volume, selecione um tipo de volume:
++
+[cols="15,85"]
+|===
+| Opção | Descrição 
+
+
+| Criar volume | Cria um volume anexado a uma única instância da AWS. 
+
+
+| Criar volume HA | Cria um volume anexado a uma única instância da AWS e espelhado em outra instância para fornecer alta disponibilidade em caso de falhas. Clique no ícone informações para ver detalhes adicionais sobre as instâncias necessárias para um volume de HA. 
+|===
+. Se você escolher criar volume, especifique os detalhes do seu primeiro volume e clique em *criar*.
++
+A tabela a seguir descreve os campos para os quais você pode precisar de orientação:
+
++
+[cols="15,85"]
+|===
+| Campo | Descrição 
+
+
+| Tamanho | O tamanho máximo do volume depende da capacidade disponível nos sistemas de storage existentes. O thin Provisioning é ativado automaticamente no volume, o que permite criar um volume maior do que o storage físico atualmente disponível para ele. Em vez de pré-alocar espaço de armazenamento, o espaço é alocado a cada volume à medida que os dados são gravados. 
+
+
+| Tipo de disco da AWS  a| 
+Você deve escolher o disco que atende aos seus requisitos de desempenho e custo.
+
+** Os discos SSD de uso geral equilibram custo e desempenho para uma ampla variedade de workloads. A performance é definida em termos de IOPS.
+** Os discos HDD otimizados para taxa de transferência são para workloads acessados com frequência que exigem taxa de transferência rápida e consistente a um preço menor.
+** Discos rígidos frios são destinados a backups, ou dados acessados com pouca frequência, porque o desempenho é muito baixo. Assim como os discos HDD otimizados para taxa de transferência, o desempenho é definido em termos de taxa de transferência.
+
+
+Para obter mais detalhes, http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html["Documentação da AWS: Tipos de volume do EBS"^] consulte .
+
+|===
++
+A imagem a seguir mostra a página criar volume preenchida:
+
++
+image:screenshot_volume_view_create.gif["Captura de tela: Mostra a página criar novo volume preenchida."]
+
+. Se você escolheu criar volume HA, especifique os detalhes do volume e clique em *criar*.
++
+A tabela a seguir descreve os campos para os quais você pode precisar de orientação:
+
++
+[cols="15,85"]
+|===
+| Campo | Descrição 
+
+
+| Tamanho | O tamanho máximo do volume depende da capacidade disponível nos sistemas de storage existentes. O thin Provisioning é ativado automaticamente no volume, o que permite criar um volume maior do que o storage físico atualmente disponível para ele. Em vez de pré-alocar espaço de armazenamento, o espaço é alocado a cada volume à medida que os dados são gravados. 
+
+
+| Tipo de disco da AWS  a| 
+Você deve escolher o disco que atende aos seus requisitos de desempenho e custo.
+
+** Os discos SSD de uso geral equilibram custo e desempenho para uma ampla variedade de workloads. A performance é definida em termos de IOPS.
+** Os discos HDD otimizados para taxa de transferência são para workloads acessados com frequência que exigem taxa de transferência rápida e consistente.
+
+
+Para obter mais detalhes, http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html["Documentação da AWS: Tipos de volume do EBS"^] consulte .
+
+
+
+| Localização | Você deve escolher uma VPC que inclua três sub-redes em três zonas de disponibilidade separadas. 
+
+
+| Nós e Mediator | Se possível, o Cloud Manager escolhe zonas de disponibilidade separadas para cada instância porque é a configuração ideal e com suporte. 
+
+
+| IP flutuante | Os endereços IP devem estar fora do bloco CIDR para todos os VPCs da região. 
+
+
+| Tabela de rotas | Se tiver mais de uma tabela de rotas, é muito importante selecionar as tabelas de rotas corretas. Caso contrário, alguns clientes podem não ter acesso ao par de HA. Para obter mais detalhes,  http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html["Documentação da AWS: Tabelas de rotas"^]consulte . 
+|===
++
+A imagem a seguir mostra a página nós e Mediator. Cada instância está em uma zona de disponibilidade separada.
+
++
+image:screenshot_volume_view_ha_network.gif["Captura de tela: Mostra as seleções de rede da AWS para os dois nós do Cloud Volumes ONTAP e o mediador. Cada instância está em uma zona de disponibilidade e sub-rede separadas."]
+
+
+
+.Resultado
+O Cloud Manager cria o volume em um sistema existente ou em um novo sistema. Se for necessário um novo sistema, a criação do volume pode demorar cerca de 25 minutos.
+
+
+
+== Montagem de volumes em hosts Linux
+
+Depois de criar um volume, você deve montá-lo em seus hosts para que eles possam acessar o volume.
+
+.Passos
+. Na guia volumes, coloque o cursor do Mouse sobre o volume, selecione o ícone do menu e clique em *montar*.
+. Clique em *Copiar*.
+. Em seus hosts Linux, modifique o texto copiado alterando o diretório de destino e digite o comando para montar o volume.
+

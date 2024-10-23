@@ -1,0 +1,76 @@
+---
+sidebar: sidebar 
+permalink: reference_user_roles.html 
+keywords: user, role, task, permission, permissions, tasks, roles, admin, cloud manager admin, admin, tenant admin, working environment admin 
+summary: Cada conta de usuário do Cloud Manager recebe uma função que define permissões. 
+---
+= Funções de utilizador
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Cada conta de usuário do Cloud Manager recebe uma função que define permissões.
+
+[cols="25,25,25,25"]
+|===
+| Tarefa | Administrador do Cloud Manager | Administrador do locatário | Admin do ambiente de trabalho 
+
+
+| Gerenciar locatários | Sim | Não | Não 
+
+
+| Gerenciar ambientes de trabalho | Sim | Sim, para o locatário atribuído | Sim, para ambientes de trabalho designados 
+
+
+| Integre um ambiente de trabalho com o Cloud Sync | Sim | Sim | Não 
+
+
+| Exibir status de replicação de dados | Sim | Sim, para o locatário atribuído | Sim, para ambientes de trabalho designados 
+
+
+| Veja a linha do tempo | Sim | Sim | Sim 
+
+
+| Criar e excluir contas de usuário | Sim | Sim, para o locatário atribuído | Não 
+
+
+| Modificar contas de usuário | Sim | Sim, para o locatário atribuído | Sim, para sua própria conta 
+
+
+| Gerir as definições da conta | Sim | Não | Não 
+
+
+| Configurar o Kubernetes | Sim | Não | Não 
+
+
+| Alterne entre a Vista do sistema de armazenamento e a Vista de volume | Sim | Não | Não 
+
+
+| Modificar definições | Sim | Não | Não 
+
+
+| Visualize e gerencie o Painel de suporte | Sim | Não | Não 
+
+
+| Faça backup e restaure o Cloud Manager | Sim | Não | Não 
+
+
+| Remova um ambiente de trabalho | Sim | Não | Não 
+
+
+| Atualize o Cloud Manager | Sim | Não | Não 
+
+
+| Instale um certificado HTTPS | Sim | Não | Não 
+
+
+| Configurar o ative Directory | Sim | Não | Não 
+
+
+| Habilite o relatório de automação do storage de nuvem | Sim | Não | Não 
+|===

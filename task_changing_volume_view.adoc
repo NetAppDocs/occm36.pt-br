@@ -1,0 +1,27 @@
+---
+sidebar: sidebar 
+permalink: task_changing_volume_view.html 
+keywords: volume view, changing, selecting, switching, views 
+summary: É possível alternar para o modo de exibição de volume do Cloud Manager, que permite criar volumes na AWS sem precisar gerenciar os sistemas de storage do Cloud Volumes ONTAP. 
+---
+= Mudar para a Vista de volume
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+O Cloud Manager oferece duas visualizações de gerenciamento: O Storage System View para gerenciar sistemas de storage em uma nuvem híbrida e o volume View para criar volumes na AWS sem precisar gerenciar sistemas de storage. Você pode alternar entre essas visualizações, mas essas instâncias devem ser raras porque uma única visualização deve atender às suas necessidades.
+
+Para obter mais informações sobre a Exibição de volume, link:concept_storage_management.html#simplified-storage-management-using-the-volume-view["Gerenciamento simplificado de storage usando a Exibição de volume"]consulte .
+
+.Passos
+. No canto superior direito do console do Cloud Manager, clique no menu e clique em *View Selection*.
+. Na página View Selection (seleção de visualização), selecione *Storage System View* (Vista do sistema de armazenamento) e, em seguida, clique em *Switch* (alternar).
+
+
+.Resultado
+O Cloud Manager muda para a visualização de volume.

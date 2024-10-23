@@ -1,0 +1,37 @@
+---
+sidebar: sidebar 
+permalink: task_removing.html 
+keywords: working environments, removing, remove, rediscover 
+summary: O administrador do Cloud Manager pode remover um ambiente de trabalho do Cloud Volumes ONTAP para movê-lo para outro sistema ou para solucionar problemas de descoberta. 
+---
+= Remoção de ambientes de trabalho do Cloud Volumes ONTAP
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+O administrador do Cloud Manager pode remover um ambiente de trabalho do Cloud Volumes ONTAP para movê-lo para outro sistema ou para solucionar problemas de descoberta.
+
+.Sobre esta tarefa
+A remoção de um ambiente de trabalho do Cloud Volumes ONTAP remove-o do Cloud Manager. Ele não exclui o sistema Cloud Volumes ONTAP. Mais tarde, você pode redescobrir o ambiente de trabalho.
+
+A remoção de um ambiente de trabalho do Cloud Manager permite que você faça o seguinte:
+
+* Redescubra-o em outro inquilino
+* Redescubra-o a partir de outro sistema Cloud Manager
+* Redescubra se você teve problemas durante a descoberta inicial
+
+
+.Passos
+. No canto superior direito do console do Cloud Manager, clique na lista suspensa tarefa e selecione *Ferramentas*.
+. Na página Ferramentas, clique em *Iniciar*.
+. Selecione o ambiente de trabalho do Cloud Volumes ONTAP que deseja remover.
+. Na página Revisão e aprovação, clique em *ir*.
+
+
+.Resultado
+O Cloud Manager remove o ambiente de trabalho. Os usuários podem redescobrir esse ambiente de trabalho a partir da página ambientes de trabalho a qualquer momento.

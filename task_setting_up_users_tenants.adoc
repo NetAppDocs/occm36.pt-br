@@ -1,0 +1,54 @@
+---
+sidebar: sidebar 
+permalink: task_setting_up_users_tenants.html 
+keywords: users, adding, creating, tenants 
+summary: O Cloud Manager permite adicionar usuários adicionais do Cloud Central ao Cloud Manager e isolar ambientes de trabalho usando locatários. 
+---
+= Configuração de usuários e locatários
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+O Cloud Manager permite adicionar usuários adicionais do Cloud Central ao Cloud Manager e isolar ambientes de trabalho usando locatários.
+
+
+
+== Adicionando usuários ao Cloud Manager
+
+Se usuários adicionais precisarem usar seu sistema do Cloud Manager, deverão se inscrever para uma conta no NetApp. Em seguida, você pode adicionar os usuários ao Cloud Manager.
+
+.Passos
+. Se o usuário ainda não tiver uma conta no NetApp Cloud Central, envie um link para o seu sistema e faça com que ele se inscreva.
++
+Aguarde até que o usuário confirme que ele se inscreveu em uma conta.
+
+. No Cloud Manager, clique no ícone do usuário e clique em *Exibir usuários*.
+. Clique em *novo usuário*.
+. Digite o endereço de e-mail associado à conta de usuário, selecione uma função e clique em *Adicionar*.
+
+
+.O que se segue?
+Informe ao usuário que ele pode fazer login no sistema Cloud Manager.
+
+
+
+== Criando inquilinos
+
+Os locatários permitem isolar seus ambientes de trabalho em grupos separados. Você cria um ou mais ambientes de trabalho dentro de um locatário. link:concept_storage_management.html#storage-isolation-using-tenants["Saiba mais sobre inquilinos"].
+
+.Passos
+. Clique no ícone de inquilinos e, em seguida, clique em *Adicionar locatário*.
++
+image:screenshot_tenants_icon.gif["Captura de tela: Mostra o ícone do locatário (um pino de pressão) e o botão Adicionar locatário, que estão disponíveis no canto superior direito do console do Cloud Manager."]
+
+. Introduza um nome, descrição e centro de custos, se necessário.
+. Clique em *Salvar*.
+
+
+.O que se segue?
+Agora você pode alternar para esse novo locatário e adicionar administradores do locatário e administradores do ambiente de trabalho a esse locatário.

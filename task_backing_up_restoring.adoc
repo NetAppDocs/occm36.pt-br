@@ -1,0 +1,48 @@
+---
+sidebar: sidebar 
+permalink: task_backing_up_restoring.html 
+keywords: backing up, back up, backup, restore, restoring 
+summary: O Cloud Manager permite fazer backup e restaurar o banco de dados para proteger sua configuração e solucionar problemas. 
+---
+= Fazer backup e restaurar o Cloud Manager
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+O Cloud Manager permite fazer backup e restaurar o banco de dados para proteger sua configuração e solucionar problemas.
+
+
+
+== Fazer backup do Cloud Manager
+
+É uma boa prática fazer backup periódico do banco de dados do Cloud Manager. Se tiver problemas, poderá restaurar o Cloud Manager a partir de um backup anterior.
+
+.Passos
+. No canto superior direito do console do Cloud Manager, clique na lista suspensa tarefa e selecione *Ferramentas*.
+. Clique em *Backup*.
++
+image:screenshot_backup.gif["Captura de tela: Mostra o botão Backup na página Ferramentas."]
+
+. Quando solicitado, salve o arquivo de backup em um local seguro para que você possa recuperá-lo quando necessário.
+
+
+
+
+== Restaurar o Cloud Manager a partir de um backup
+
+A restauração do Cloud Manager a partir de um backup substitui os dados existentes pelos dados do backup.
+
+.Passos
+. No canto superior direito do console do Cloud Manager, clique na lista suspensa tarefa e selecione *Ferramentas*.
+. Clique em *Restaurar*.
+. Clique em *OK* para confirmar.
+. Selecione a cópia de segurança.
+
+
+.Resultado
+O Cloud Manager restaura o banco de dados do arquivo de backup.

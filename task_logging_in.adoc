@@ -1,0 +1,31 @@
+---
+sidebar: sidebar 
+permalink: task_logging_in.html 
+keywords: logging in, log in, sign in, signing in, cloud central, netapp cloud central, user account 
+summary: Você pode fazer login no Cloud Manager a partir de qualquer navegador da Web que tenha uma conexão com o sistema Cloud Manager. Você deve fazer login usando uma conta de usuário do NetApp Cloud Central. 
+---
+= Iniciar sessão no Cloud Manager
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Você pode fazer login no Cloud Manager a partir de qualquer navegador da Web que tenha uma conexão com o sistema Cloud Manager. Você deve fazer login usando uma https://cloud.netapp.com["Centro de nuvem da NetApp"^] conta de usuário.
+
+.Passos
+. Abra um navegador da Web e faça login no https://cloud.netapp.com["Centro de nuvem da NetApp"^].
+. Clique em *ir para Serviços de dados na nuvem* e selecione *Cloud Volumes ONTAP*.
+. Clique em *vá para o Cloud Manager* para o sistema Cloud Manager que você deseja acessar.
++
+
+TIP: Se você não encontrar nenhum sistema listado, certifique-se de que o administrador do Gerenciador de nuvem adicionou sua conta do NetApp ao sistema.
+
+. Faça login no Gerenciador de nuvem usando sua conta do NetApp Cloud Central.
++
+image:screenshot_login.gif["A tela de login do Cloud Manager."]
+
+

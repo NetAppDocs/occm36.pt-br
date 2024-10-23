@@ -1,0 +1,32 @@
+---
+sidebar: sidebar 
+permalink: task_editing_users.html 
+keywords: editing, users, user accounts, modify, modifying, report, notification, password, notification report 
+summary: Você pode modificar contas de usuário no Cloud Manager ativando e desativando o relatório de notificação. 
+---
+= Editando contas de usuário
+:hardbreaks:
+:allow-uri-read: 
+:backend-html5-doctype-book: 
+:basebackend-html-doctype-book: 
+:doctype-book: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Você pode modificar contas de usuário no Cloud Manager ativando e desativando o relatório de notificação.
+
+.Sobre esta tarefa
+A senha e as informações do usuário devem ser alteradas em https://cloud.netapp.com["Centro de nuvem da NetApp"^].
+
+.Passos
+. No canto superior direito do console do Cloud Manager, clique no ícone do usuário e selecione *Exibir usuários*.
+. Selecione o ícone de menu no final da linha e clique em *Editar usuário*.
++
+image:screenshot_edit_user.gif["Captura de tela: Mostra o menu para editar uma conta de usuário. O menu está localizado junto ao nome de utilizador."]
+
+. Na página Configurações do usuário, modifique a conta do usuário.
+

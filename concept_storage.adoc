@@ -1,0 +1,85 @@
+---
+sidebar: sidebar 
+permalink: concept_storage.html 
+keywords: storage, capacity, volumes, aggregates, raw capacity, usable capacity, aws, azure 
+summary: Entender como o Cloud Volumes ONTAP usa o storage de nuvem pode ajudar você a entender seus custos de storage. 
+---
+= Como o Cloud Volumes ONTAP usa o storage de nuvem
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Entender como o Cloud Volumes ONTAP usa o storage de nuvem pode ajudar você a entender seus custos de storage.
+
+
+
+== Visão geral
+
+O Cloud Volumes ONTAP usa o AWS e o Azure volumes como storage de back-end. Ele vê esses volumes como discos e os agrupa em um ou mais agregados. Agregados fornecem storage para um ou mais volumes.
+
+image:diagram_storage.png["Esta ilustração mostra um agregado composto por discos EBS e os volumes de dados que o Cloud Volumes ONTAP disponibiliza aos hosts."]
+
+Vários tipos de discos de nuvem são suportados. Você escolhe o tipo de disco ao criar volumes e o tamanho de disco padrão ao implantar o Cloud Volumes ONTAP.
+
+
+TIP: A quantidade total de storage comprada da AWS ou do Azure é a _capacidade bruta_. A _capacidade utilizável_ é menor porque aproximadamente 12 a 14% é sobrecarga reservada para uso Cloud Volumes ONTAP. Por exemplo, se o Cloud Manager criar um agregado de 500 GB, a capacidade utilizável será de 442,94 GB.
+
+
+
+== Storage da AWS
+
+Na AWS, um agregado pode conter até 6 discos com o mesmo tamanho. O tamanho máximo do disco é de 16 TB.
+
+O tipo de disco EBS subjacente pode ser SSD de uso geral, SSD IOPS provisionado, HDD otimizado para taxa de transferência ou HDD frio. Você também pode emparelhar um disco EBS com o Amazon S3 para link:concept_data_tiering.html["categorização de dados"].
+
+A um nível elevado, as diferenças entre os tipos de discos EBS são as seguintes:
+
+* _Discos SSD_ de uso geral equilibram custo e desempenho para uma ampla variedade de cargas de trabalho. A performance é definida em termos de IOPS.
+* Os discos SSD _IOPS provisionados são para aplicativos críticos que exigem o mais alto desempenho a um custo mais alto.
+* _Discos HDD_ otimizados para taxa de transferência são para cargas de trabalho acessadas com frequência que exigem taxa de transferência rápida e consistente a um preço menor.
+* _Cold HDD_ discos são destinados a backups, ou dados acessados com pouca frequência, porque o desempenho é muito baixo. Assim como os discos HDD otimizados para taxa de transferência, o desempenho é definido em termos de taxa de transferência.
+
+
+
+NOTE: Discos rígidos inativos não são compatíveis com configurações de HA e com categorização de dados.
+
+Para obter detalhes adicionais sobre os casos de uso desses discos, http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html["Documentação da AWS: Tipos de volume do EBS"^] consulte .
+
+link:task_planning_your_config.html#sizing-your-system-in-aws["Saiba como escolher tipos de disco e tamanhos de disco para seus sistemas na AWS"].
+
+https://docs.netapp.com/cloud-volumes-ontap/us-en/reference_storage_limits_95.html["Reveja os limites de armazenamento do Cloud Volumes ONTAP"].
+
+
+
+== Storage Azure
+
+No Azure, um agregado pode conter até 12 discos com o mesmo tamanho. O tipo de disco e o tamanho máximo do disco dependem se você usa um sistema de nó único ou um par de HA:
+
+Sistemas de nó único:: Sistemas de nó único podem usar três tipos de discos gerenciados do Azure:
++
+--
+* _Discos gerenciados SSD premium_ fornecem alto desempenho para cargas de trabalho com uso intenso de e/S a um custo mais alto.
+* _Discos gerenciados SSD padrão_ fornecem desempenho consistente para cargas de trabalho que exigem IOPS baixo.
+* _Discos gerenciados HDD padrão_ são uma boa escolha se você não precisa de IOPS alto e quer reduzir seus custos.
++
+Cada tipo de disco gerenciado tem um tamanho máximo de disco de 32 TB.
+
++
+É possível emparelhar um disco gerenciado com o armazenamento de Blob do Azure para link:concept_data_tiering.html["categorização de dados"]o .
+
+
+
+--
+Pares HA:: Os pares HA usam blobs de página Premium, que têm um tamanho máximo de disco de 8 TB.
+
+
+Para obter detalhes adicionais sobre os casos de uso desses discos, https://azure.microsoft.com/documentation/articles/storage-introduction/["Documentação do Microsoft Azure: Introdução ao Microsoft Azure Storage"^] consulte .
+
+link:task_planning_your_config.html#sizing-your-system-in-azure["Saiba como escolher tipos de disco e tamanhos de disco para seus sistemas no Azure"].
+
+https://docs.netapp.com/cloud-volumes-ontap/us-en/reference_storage_limits_95.html["Reveja os limites de armazenamento do Cloud Volumes ONTAP"].
